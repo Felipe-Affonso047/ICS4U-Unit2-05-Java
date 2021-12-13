@@ -2,10 +2,12 @@
 * This program prints out
 * the Magic Sqaures.
 *
-* @author  Nicholas B. & Mr. Coxall
+* @author  Nicholas B. , Mr. Coxall & Felipe Affonso
 * @version 1.0
 * @since   2020-01-01
 */
+
+import java.util.Arrays;
 
 final class MagicNumber {
     private MagicNumber() {
@@ -32,11 +34,22 @@ final class MagicNumber {
     /** The maximum number for magicNumbers. */
     public static final int MAGICNUM = 15;
 
+    public static int numberOfProcess = 0;
+
 
     public static void genSquare(final int[] square, final int[] currentSquare,
                                  final int index) {
         // generate the magic sqaure
-
+        if (index < square.length) {
+            for (int counter = 0; counter < square.length; counter++) {
+                numberOfProcess++;
+                if (isMagic(currentSquare)) {
+                    printMagicSquare(currentSquare);
+                }
+                currentSquare[counter] = square[index];
+                genSquare(square, currentSquare, index + 1);
+            }
+        }
     }
 
     public static boolean isMagic(final int[] preSquare) {
@@ -76,5 +89,7 @@ final class MagicNumber {
         System.out.println("\n");
         System.out.println("All Possible Magic Squares (3x3):\n");
         genSquare(magicSquare, extraArray, 0);
+
+        System.out.println("Done, number of processes: " + numberOfProcess);
     }
 }
