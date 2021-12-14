@@ -7,8 +7,6 @@
 * @since   2020-01-01
 */
 
-import java.util.Arrays;
-
 final class MagicNumber {
     private MagicNumber() {
         // Prevent instantiation
@@ -40,14 +38,21 @@ final class MagicNumber {
     public static void genSquare(final int[] square, final int[] currentSquare,
                                  final int index) {
         // generate the magic sqaure
-        if (index < square.length) {
-            for (int counter = 0; counter < square.length; counter++) {
-                numberOfProcess++;
-                if (isMagic(currentSquare)) {
-                    printMagicSquare(currentSquare);
+        for (int counter = 0; counter < square.length; counter++) {
+            numberOfProcess++;
+            if (currentSquare[counter] == 0) {
+                // incriment to the next step
+                square[index] = counter + 1;
+                currentSquare[counter] = 1;
+
+                // only fill in spots that have not yet been filled in
+                if (index < square.length - 1) {
+                    genSquare(square, currentSquare, index + 1);
+                } else if (isMagic(square)) {
+                    // if all done and it is magic, then print it out
+                    printMagicSquare(square);
                 }
-                currentSquare[counter] = square[index];
-                genSquare(square, currentSquare, index + 1);
+                currentSquare[counter] = 0;
             }
         }
     }
