@@ -32,7 +32,10 @@ final class MagicNumber {
     /** The maximum number for magicNumbers. */
     public static final int MAGICNUM = 15;
 
-    public static int numberOfProcess = 0;
+    /**
+    * Process numbers.
+    */
+    private static int numberOfProcess = 0;
 
 
     public static void genSquare(final int[] square, final int[] currentSquare,
